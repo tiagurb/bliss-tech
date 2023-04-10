@@ -37,7 +37,13 @@ function QuestionList() {
       <h1>Questions</h1>
       <ul>
         {questions.map((question) => {
-          return <li><h3 key={question.id}>{question.question}</h3></li>;
+          return (
+            <li>
+              <h3 key={question.id}>
+                <Link to={`/question/${question.id}`}>{question.question}</Link>
+              </h3>
+            </li>
+          );
         })}
       </ul>
     </>
