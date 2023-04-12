@@ -29,6 +29,30 @@ function QuestionDetail() {
     return <p>{error}</p>;
   }
 
+  if (question.length === 0) {
+    return <h1>Loading ...</h1>;
+  }
+
+  return (
+    <>
+      <h1>Question Details :</h1>
+      <div>
+        <img src={question.image_url} alt={question.question}/>
+        <h3>{question.question}</h3>
+        <p>Date of publishement: {new Date(question.published_at).toLocaleDateString()}</p>
+        <div>
+          {question.choices.map(({choice, votes}) => {
+            return (
+              <div key={choice}>
+                <p>{choice}</p>
+                <p>Votes: {votes}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
   
 
 

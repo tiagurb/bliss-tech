@@ -11,7 +11,7 @@ function App() {
     <SearchBar/>
     <Routes>
       <Route path="/" element={<QuestionList/>}/>
-      <Route path="/question/:questionId" element={<QuestionDetail />} />
+      <Route path="/questions/:questionId" element={<QuestionDetail />} />
       <Route path="/questions?limit=10&offset=0&filter=:query" element={<SearchPage/>}/>
     </Routes>
     </div>
