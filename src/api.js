@@ -12,4 +12,8 @@ export const getQuestion = (id) => {
 
 export const getHealth = () => {
     return axios.get(`${BASE_URL}/health`);
-}
+};
+
+export const getSearch = (filter) => {
+    return axios.get(`${BASE_URL}/questions?limit=10&offset=0&filter=${filter}`);
+};
