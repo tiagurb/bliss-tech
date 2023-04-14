@@ -12,4 +12,16 @@ export const getQuestion = (id) => {
 
 export const getHealth = () => {
     return axios.get(`${BASE_URL}/health`);
-}
+};
+
+export const getSearch = (filter) => {
+    return axios.get(`${BASE_URL}/questions?limit=10&offset=0&filter=${filter}`);
+};
+
+export const updateVotes = (id, question) => {
+    return axios.put(`${BASE_URL}/questions/question_${id}`, question)
+};
+
+export const shareLink = (destinationEmail, contentUrl) => {
+    return axios.post(`${BASE_URL}/share?destination_email=${destinationEmail}&content_url=${contentUrl}`)
+};
