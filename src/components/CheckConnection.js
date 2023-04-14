@@ -18,8 +18,9 @@ function CheckConnection() {
       const result = await checkOnlineStatus();
       if (result === false && connectionToastId === null ) {
         connectionToastId = toast.loading("Please restore internet connection!")
-      } else if (result === true) {
-        toast.update(connectionToastId, { render: "All is good", type: "success", isLoading: false });
+      } else if (result === true && connectionToastId !== null) {
+        toast.update(connectionToastId, { render: "All is good", type: "success", isLoading: false, autoClose: 3000 });
+        connectionToastId = null;
       }
     };
 
