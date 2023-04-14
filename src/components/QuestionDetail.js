@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getHealth, getQuestion, updateVotes } from "../api";
 import { toast } from "react-toastify";
+import ShareLink from "./ShareLink";
 
 function QuestionDetail() {
   const [question, setQuestion] = useState([]);
@@ -27,8 +28,10 @@ function QuestionDetail() {
   }, [questionId]);
 
   async function handleSubmitVote(index) {
-    const updatedQuestion = {...question};
-    updatedQuestion.choices[index].votes = String(Number(updatedQuestion.choices[index].votes) + 1);
+    const updatedQuestion = { ...question };
+    updatedQuestion.choices[index].votes = String(
+      Number(updatedQuestion.choices[index].votes) + 1
+    );
     await updateVotes(updatedQuestion.id, updatedQuestion);
     setQuestion(updatedQuestion);
     toast.success("Voted with success");
@@ -44,26 +47,35 @@ function QuestionDetail() {
 
   return (
     <>
+      <Link to={"/"}>
+        <button className="dismissBtn">Dismiss search</button>
+      </Link>
       <h1>Question Details :</h1>
       <div>
         <img src={question.image_url} alt={question.question} />
-        <h3>{question.question}</h3>
         <p>
           Date of publishement:{" "}
           {new Date(question.published_at).toLocaleDateString()}
         </p>
-        <div>
+        <h2>{question.question}</h2>
+        <div className="options">
           {question.choices.map(({ choice, votes }, index) => {
             return (
               <div key={choice}>
                 <p>{choice}</p>
                 <p>Votes: {votes}</p>
-                <button onClick={() => handleSubmitVote(index)}>Vote here</button>
+                <button
+                  className="voteBtn"
+                  onClick={() => handleSubmitVote(index)}
+                >
+                  Vote here
+                </button>
               </div>
             );
           })}
         </div>
       </div>
+      <ShareLink />
     </>
   );
 }

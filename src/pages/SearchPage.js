@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import {  getHealth, getSearch } from "../api";
 import { toast } from "react-toastify";
 import { Link, useLocation } from "react-router-dom";
+import ShareLink from "../components/ShareLink";
 
 function SearchPage() {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
 
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get("filter");
+  let query = new URLSearchParams(location.search).get("filter");
 
   useEffect(() => {
     async function handleGetSearchQuestions() {
@@ -20,7 +21,6 @@ function SearchPage() {
         }
         const response = await getSearch(query);
         setQuestions(response.data);
-        console.log(response.data)
       } catch (error) {
         toast.error("An error has occured", error.message);
       }
@@ -38,7 +38,7 @@ function SearchPage() {
 
   return (
     <>
-      <button><Link to={"/"}>Dismiss search</Link></button>
+      <Link to={"/"}><button className="dismissBtn">Dismiss search</button></Link>
 
       <h1>Search result:</h1>
       
@@ -47,12 +47,13 @@ function SearchPage() {
           return (
             <li key={question.id}>
               <h3>
-                <Link to={`/question/${question.id}`}>{question.question}</Link>
+                <Link to={`/questions/${question.id}`}>{question.question}</Link>
               </h3>
             </li>
           );
         })}
       </ul>
+      <ShareLink />
     </>
   );
 }

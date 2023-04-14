@@ -35,15 +35,13 @@ function SearchBar() {
   return (
     <>
       <form>
-        <label htmlFor="search">
-          <span>Search questions</span>
-        </label>
-        <input
+        <label htmlFor="search"/>
+        <input className="input"
           type="text"
-          placeholder="Hearch questions"
+          placeholder="Shearch questions"
           onChange={handleInput}
         />
-        <button type="submit" onClick={handleSubmitSearch}>
+        <button className="inputBtn" type="submit" onClick={handleSubmitSearch}>
           Search
         </button>
       </form>
