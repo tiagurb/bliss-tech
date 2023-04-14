@@ -21,3 +21,7 @@ export const getSearch = (filter) => {
 export const updateVotes = (id, question) => {
     return axios.put(`${BASE_URL}/questions/question_${id}`, question)
 };
+
+export const shareLink = (destinationEmail, contentUrl) => {
+    return axios.post(`${BASE_URL}/share?destination_email=${destinationEmail}&content_url=${contentUrl}`)
+};

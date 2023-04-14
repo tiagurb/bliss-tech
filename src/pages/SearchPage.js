@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import {  getHealth, getSearch } from "../api";
 import { toast } from "react-toastify";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function SearchPage() {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
-  // const { query } = useParams
 
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("filter");
@@ -39,8 +38,9 @@ function SearchPage() {
 
   return (
     <>
-    
-      <h1>Questions</h1>
+      <button><Link to={"/"}>Dismiss search</Link></button>
+
+      <h1>Search result:</h1>
       
       <ul>
         {questions.map((question) => {
