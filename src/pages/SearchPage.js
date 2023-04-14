@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import {  getHealth, getSearch } from "../api";
 import { toast } from "react-toastify";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
-function QuestionList() {
+function SearchPage() {
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState("");
-  const { query } = useParams
+  // const { query } = useParams
 
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("filter");
 
   useEffect(() => {
     async function handleGetSearchQuestions() {
@@ -37,13 +39,14 @@ function QuestionList() {
 
   return (
     <>
+    
       <h1>Questions</h1>
       
       <ul>
         {questions.map((question) => {
           return (
-            <li>
-              <h3 key={question.id}>
+            <li key={question.id}>
+              <h3>
                 <Link to={`/question/${question.id}`}>{question.question}</Link>
               </h3>
             </li>
@@ -54,4 +57,4 @@ function QuestionList() {
   );
 }
 
-export default QuestionList;
+export default SearchPage;

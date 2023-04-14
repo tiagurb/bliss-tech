@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<QuestionList />} />
         <Route path="/questions/:questionId" element={<QuestionDetail />} />
         <Route
-          path="/questions?limit=10&offset=0&filter=:query"
+          path="/questions"
           element={<SearchPage />}
         />
       </Routes>
