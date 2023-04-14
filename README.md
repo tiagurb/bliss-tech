@@ -1,6 +1,5 @@
-# Welcome to my App
+# Welcome to the Challange
 
-1 npm i
+## To start, do npm install 
 
-
-note no .env because the api url is shown just so that you ca see, normally it would be inside the .env
+## In second do npm start, and you should see the result!
