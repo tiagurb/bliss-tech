@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllQuestions, getHealth } from "../api";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import CheckConnection from "./CheckConnection";
 
 function QuestionList() {
   const [questions, setQuestions] = useState([]);
@@ -23,6 +24,8 @@ function QuestionList() {
     }
     handleGetAllQuestions();
   }, []);
+
+  
 
   if (error) {
     return <p>{error}</p>;
