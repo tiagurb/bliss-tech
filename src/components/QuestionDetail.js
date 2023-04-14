@@ -26,34 +26,13 @@ function QuestionDetail() {
     handleGetQuestionDetail();
   }, [questionId]);
 
-  async function handleSubmitVote(id, index) {
+  async function handleSubmitVote(index) {
     const updatedQuestion = {...question};
-    setVotes (Number(updatedQuestion.choices[index].votes) +1);
-    console.log(updatedQuestion.choices[index].votes)
+    updatedQuestion.choices[index].votes = String(Number(updatedQuestion.choices[index].votes) + 1);
     await updateVotes(updatedQuestion.id, updatedQuestion);
     setQuestion(updatedQuestion);
     toast.success("Voted with success");
   }
-
-  // async function handleVote(id, index) {
-  //   const newQuestion = { ...question };
-  //   if (newQuestion.choices[index]) {
-  //     newQuestion.choices[index].votes =
-  //       Number(newQuestion.choices[index].votes) + 1;
-  //     setQuestion(newQuestion);
-  //   }
-  //   setQuestion(newQuestion);
-
-  //   try {
-  //     const response = await updateVotes(id, newQuestion);
-  //     if (response.data.status !== "OK") {
-  //       toast.error("Error updating votes");
-  //       return;
-  //     }
-  //   } catch (error) {
-  //     toast.error("An error has occurred", error.message);
-  //   }
-  // }
 
   if (error) {
     return <p>{error}</p>;
@@ -74,12 +53,12 @@ function QuestionDetail() {
           {new Date(question.published_at).toLocaleDateString()}
         </p>
         <div>
-          {question.choices.map(({ choice, votes }) => {
+          {question.choices.map(({ choice, votes }, index) => {
             return (
               <div key={choice}>
                 <p>{choice}</p>
                 <p>Votes: {votes}</p>
-                <button onClick={handleSubmitVote}>Vote here</button>
+                <button onClick={() => handleSubmitVote(index)}>Vote here</button>
               </div>
             );
           })}
